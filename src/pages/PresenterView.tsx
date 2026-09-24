@@ -182,7 +182,7 @@ export default function PresenterView() {
 
   if (loading) return <div className="min-h-screen bg-slate-900 text-white p-8">Laddar session...</div>;
 
-  const joinUrl = `${window.location.origin}/#/join/${code}`;
+  const joinUrl = `${window.location.origin}${window.location.pathname}#/join/${code}`;
 
   return (
     <div className="min-h-screen bg-slate-900 text-slate-50 flex flex-col">
