@@ -105,7 +105,7 @@ export default function Home() {
               <p className="text-xs text-slate-500 mb-4 line-clamp-2">Bedömning av studier med kvalitativ metodik.</p>
               <div className="flex flex-col gap-2">
                 <a 
-                  href="https://www.sbu.se/globalassets/ebm/mallar/kvalitativa_studier.pdf"
+                  href={`${import.meta.env.BASE_URL}sbu-mall.pdf`}
                   target="_blank"
                   rel="noreferrer"
                   className="text-xs font-semibold bg-indigo-100 text-indigo-700 py-2 px-3 rounded-lg hover:bg-indigo-200 transition-colors text-center"
@@ -113,7 +113,7 @@ export default function Home() {
                   Öppna SBU-mallen
                 </a>
                 <a 
-                  href="https://www.sbu.se/globalassets/ebm/mallar/kvalitativa_studier.pdf"
+                  href={`${import.meta.env.BASE_URL}sbu-mall.pdf`}
                   download
                   className="text-xs font-semibold bg-slate-200 text-slate-700 py-2 px-3 rounded-lg hover:bg-slate-300 transition-colors text-center"
                 >
