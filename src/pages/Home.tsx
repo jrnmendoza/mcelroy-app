@@ -35,9 +35,19 @@ export default function Home() {
         
         <p className="text-lg text-slate-600 mb-8 leading-relaxed max-w-lg mx-auto">
           Du behöver inte ha läst artikeln i förväg.
-          <br /><br />
-          Här går du igenom studien steg för steg och gör sedan en kritisk granskning med SBU:s granskningsmall för kvalitativa studier.
         </p>
+
+        <div className="bg-slate-50 rounded-2xl p-6 mb-8 text-left max-w-md mx-auto border border-slate-100">
+          <h3 className="font-bold text-slate-800 mb-4 uppercase tracking-wider text-sm">Så fungerar det</h3>
+          <ul className="space-y-3 text-slate-700 font-medium">
+            <li className="flex items-center gap-3"><span className="bg-blue-200 text-blue-800 w-6 h-6 rounded-full flex items-center justify-center text-xs">1</span> Förstå studien</li>
+            <li className="flex items-center gap-3"><span className="bg-blue-200 text-blue-800 w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span> Utforska resultaten</li>
+            <li className="flex items-center gap-3"><span className="bg-blue-200 text-blue-800 w-6 h-6 rounded-full flex items-center justify-center text-xs">3</span> Granska metoden med SBU</li>
+            <li className="flex items-center gap-3"><span className="bg-blue-200 text-blue-800 w-6 h-6 rounded-full flex items-center justify-center text-xs">4</span> Jämför din bedömning med kollegornas</li>
+            <li className="flex items-center gap-3"><span className="bg-blue-200 text-blue-800 w-6 h-6 rounded-full flex items-center justify-center text-xs">5</span> Gör en samlad bedömning</li>
+          </ul>
+          <p className="text-xs text-slate-500 mt-4 font-semibold text-center">Beräknad tid: ca 15-20 minuter</p>
+        </div>
 
         {percentageComplete > 0 && (
           <div className="mb-8 p-4 bg-blue-50 rounded-xl inline-flex items-center gap-4 text-blue-800 font-medium">

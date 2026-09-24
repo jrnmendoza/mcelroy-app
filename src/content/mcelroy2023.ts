@@ -54,7 +54,8 @@ export const SBU_DOMAINS = [
         text: "Hänger syfte och fråga ihop med teori/filosofisk hållning?",
         article_evidence: {
           reported: "Syftet var att få insikter från medarbetare om debriefing, utforska erfarenheter och reflektera kring psykologisk trygghet och hierarki. De utgick från ett 'critical realism paradigm' och använde Reflexiv Tematisk Analys (RTA).",
-          reference: "McElroy et al., Materials and Methods, s. 568"
+          reference: "McElroy et al., Materials and Methods, s. 568",
+          extraContext: "Författarna använde 'critical realism' som söker förklara mekanismer i sociala sammanhang. Syftet att undersöka erfarenheter och utforma policys stämmer väl överens med en reflexiv tematisk analys (RTA)."
         },
         options: ["Ja", "Nej", "Oklart"]
       }
@@ -69,7 +70,8 @@ export const SBU_DOMAINS = [
         text: "Är urvalet lämpligt för att besvara frågan?",
         article_evidence: {
           reported: "40 operationsmedarbetare intervjuades: sjuksköterskor (14), anestesitekniker (7), anestesiläkare (7) och kirurger (12). Urvalet var strategiskt (purposive) för att fånga en rad olika professioner.",
-          reference: "McElroy et al., Materials and Methods, s. 568 & Table 1"
+          reference: "McElroy et al., Materials and Methods, s. 568 & Table 1",
+          extraContext: "Urvalet var strategiskt för att säkerställa att erfarenheter från flera yrkesgrupper som deltar i operationer hördes, vilket passar syftet om team-debriefing."
         },
         options: ["Ja", "Nej", "Oklart"]
       },
@@ -78,7 +80,8 @@ export const SBU_DOMAINS = [
         text: "Är rekryteringsmetoden lämpligt vald och genomförd?",
         article_evidence: {
           reported: "Personalen gjordes medveten om projektet på möten. Två forskare rekryterade aktivt deltagare att medverka. Skriftligt samtycke inhämtades.",
-          reference: "McElroy et al., Materials and Methods, s. 568"
+          reference: "McElroy et al., Materials and Methods, s. 568",
+          extraContext: "Rekryteringen skedde 'in the moment' när personal var tillgänglig på sjukhuset."
         },
         options: ["Ja", "Nej", "Oklart"]
       },
@@ -98,7 +101,8 @@ export const SBU_DOMAINS = [
         text: "Finns det allvarliga brister i datainsamlingen som kan påverka tillförlitligheten?",
         article_evidence: {
           reported: "Datainsamlingen var semistrukturerade intervjuer i avskilda rum, ljudinspelade och transkriberade ordagrant. Intervjuerna varade i 10-20 minuter och leddes med öppna frågor där informanten fick prata fritt.",
-          reference: "McElroy et al., Materials and Methods, s. 568"
+          reference: "McElroy et al., Materials and Methods, s. 568",
+          extraContext: "10-20 minuter kan vara kort för kvalitativa djupintervjuer, men acceptabelt i en stressig sjukhusmiljö."
         },
         options: ["Ja", "Nej", "Oklart"]
       }
@@ -113,7 +117,8 @@ export const SBU_DOMAINS = [
         text: "Är vald analysmetod lämplig och genomförd på ett lämpligt sätt?",
         article_evidence: {
           reported: "Forskarna använde Braun och Clarkes metod för reflexiv tematisk analys (RTA). Kodning gjordes oberoende av två forskare (C.M. och J.H.) som därefter träffades för att forma teman. Tre teman utvecklades.",
-          reference: "McElroy et al., Materials and Methods, s. 568"
+          reference: "McElroy et al., Materials and Methods, s. 568",
+          extraContext: "Att två forskare kodar oberoende och sedan diskuterar för att forma gemensamma teman är en god metodologisk praxis inom RTA för att stärka trovärdigheten."
         },
         options: ["Ja", "Nej", "Oklart"]
       },
@@ -122,7 +127,8 @@ export const SBU_DOMAINS = [
         text: "Var forskarna reflexiva vid tolkning av data?",
         article_evidence: {
           reported: "De uppger att de använde RTA och 'djup reflektion'. De redovisar dock inte detaljerat hur deras egna yrkesroller i gruppen inverkade på tolkningen av datan (t.ex. att överläkare intervjuar sjuksköterskor).",
-          reference: "McElroy et al., Materials and Methods & Limitations, s. 568, 572"
+          reference: "McElroy et al., Materials and Methods & Limitations, s. 568, 572",
+          extraContext: "Författarna nämner i limitations att deltagarna var från en enda avdelning, men problematiserar inte maktpositionen mellan intervjuare och respondent i sin analys."
         },
         options: ["Ja", "Nej", "Oklart"]
       },
@@ -131,7 +137,8 @@ export const SBU_DOMAINS = [
         text: "Validerades tolkningarna?",
         article_evidence: {
           reported: "Deltagarna fick kopior av sina transkriberingar för godkännande. Formell 'member-checking' (validering av temana med intervjupersonerna) gjordes dock inte, vilket forskarna själva anger som en limitation.",
-          reference: "McElroy et al., Limitations, s. 572"
+          reference: "McElroy et al., Limitations, s. 572",
+          extraContext: "De validerade rådatan (transkriptionerna), men inte den slutgiltiga analysen (temana)."
         },
         options: ["Ja", "Nej", "Oklart"]
       },
@@ -151,7 +158,8 @@ export const SBU_DOMAINS = [
         text: "Har forskarna någon relation till studiedeltagarna som kan påverka datainsamlingen?",
         article_evidence: {
           reported: "Författarna (inklusive kirurger och annan personal) arbetade på samma institution (Starship Children's Hospital). Detta kan påverka frivilligheten och maktdynamiken i intervjusituationen.",
-          reference: "McElroy et al., Affiliations & Methods, s. 567"
+          reference: "McElroy et al., Affiliations & Methods, s. 567",
+          extraContext: "Närhet till deltagarna kan underlätta rekrytering men också skapa partiskhet (bias) där deltagarna svarar det de tror att forskaren/kollegan vill höra."
         },
         options: ["Ja", "Nej", "Oklart"]
       },
@@ -160,7 +168,8 @@ export const SBU_DOMAINS = [
         text: "Har forskarna hanterat sin förförståelse på ett acceptabelt sätt?",
         article_evidence: {
           reported: "Två forskare (C.M. och E.S.) fick träningssessioner av en oberoende kulturexpert inför intervjuerna för att hantera detta, och de uppger ett reflexivt förhållningssätt. Dock är informationen kortfattad.",
-          reference: "McElroy et al., Materials and Methods, s. 568"
+          reference: "McElroy et al., Materials and Methods, s. 568",
+          extraContext: "Det är oklart i hur stor utsträckning kulturexpertens träning hjälpte till att motverka den hierarkiska förförståelsen på kliniken."
         },
         options: ["Ja", "Nej", "Oklart"]
       },
@@ -169,7 +178,8 @@ export const SBU_DOMAINS = [
         text: "Var forskarna oberoende av finansiella eller andra förutsättningar som kunde påverka analysen?",
         article_evidence: {
           reported: "Forskningen var stöttad av The Starship Foundation. Författarna deklarerar 'None declared' under Disclosure (jäv).",
-          reference: "McElroy et al., Disclosure & Funding, s. 572"
+          reference: "McElroy et al., Disclosure & Funding, s. 572",
+          extraContext: "Stiftelsen bakom sjukhuset stod för finansieringen. Inga andra intressekonflikter anges."
         },
         options: ["Ja", "Nej", "Oklart"]
       },

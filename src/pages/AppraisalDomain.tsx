@@ -120,16 +120,30 @@ export default function AppraisalDomain() {
               <h2 className="text-xl font-bold text-slate-800 mb-6">{q.text}</h2>
               
               {q.article_evidence && (
-                <div className="mb-8 p-5 bg-slate-50 border border-slate-200 rounded-xl">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Info size={18} className="text-blue-500" />
-                    <h3 className="font-semibold text-slate-700 text-sm uppercase tracking-wider">Vad säger McElroy?</h3>
+                <div className="mb-8 bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Info size={18} className="text-blue-500" />
+                      <h3 className="font-semibold text-slate-700 text-sm uppercase tracking-wider">Vad säger McElroy?</h3>
+                    </div>
+                    <p className="text-slate-700 mb-3">{q.article_evidence.reported}</p>
+                    <p className="text-xs font-semibold text-slate-500 uppercase mb-4">Var hittar du det? {q.article_evidence.reference}</p>
+                    
+                    {q.article_evidence.extraContext && (
+                      <details className="group">
+                        <summary className="text-sm font-semibold text-blue-600 cursor-pointer list-none flex items-center gap-1 hover:text-blue-700">
+                          Visa mer kontext
+                        </summary>
+                        <div className="mt-3 p-4 bg-white border border-slate-100 rounded-lg text-sm text-slate-600">
+                          {q.article_evidence.extraContext}
+                        </div>
+                      </details>
+                    )}
                   </div>
-                  <p className="text-slate-700 mb-3">{q.article_evidence.reported}</p>
-                  <p className="text-xs font-semibold text-slate-500 uppercase">Källa: {q.article_evidence.reference}</p>
                 </div>
               )}
 
+              <h4 className="font-semibold text-slate-700 mb-4 text-sm">Din bedömning</h4>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
                 {q.options.map(opt => (
                   <button
@@ -147,8 +161,9 @@ export default function AppraisalDomain() {
               </div>
 
               <div className="mb-6">
+                <h4 className="font-semibold text-slate-700 mb-2 text-sm">Motivering (Frivilligt)</h4>
                 <textarea
-                  placeholder="Motivera gärna din bedömning utifrån artikeln. Ange inga namn eller kollegor."
+                  placeholder="Motivera gärna din bedömning utifrån artikeln. Skriv endast om artikeln. Ange inga namn, patientuppgifter eller information om kollegor."
                   value={comments[q.id] || ''}
                   onChange={(e) => handleComment(q.id, e.target.value)}
                   className="w-full p-4 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-sm"

@@ -13,7 +13,6 @@
     "@supabase/supabase-js": "^2.117.1",
     "classnames": "^2.5.1",
     "lucide-react": "^1.48.0",
-    "qrcode.react": "^4.2.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.4",

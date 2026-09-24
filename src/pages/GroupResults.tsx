@@ -30,11 +30,11 @@ export default function GroupResults() {
   }, [userId]);
 
   const fetchResults = async () => {
-    const { data } = await supabase.from('overall_appraisal').select('user_id, assessment');
-    if (data) {
-      setTotal(data.length);
+    const { data: overallData } = await supabase.from('overall_appraisal').select('user_id, assessment');
+    if (overallData) {
+      setTotal(overallData.length);
       const agg: Record<string, number> = {};
-      data.forEach(row => {
+      overallData.forEach(row => {
         agg[row.assessment] = (agg[row.assessment] || 0) + 1;
         if (row.user_id === userId) {
           setMyAssessment(row.assessment);
@@ -42,13 +42,49 @@ export default function GroupResults() {
       });
       setAggregates(agg);
     }
+
+    const { data: responsesData } = await supabase.from('responses').select('question_id, answer');
+    if (responsesData) {
+      const qAgg: Record<string, Record<string, number>> = {};
+      responsesData.forEach(r => {
+        if (!qAgg[r.question_id]) qAgg[r.question_id] = { Ja: 0, Nej: 0, Oklart: 0 };
+        qAgg[r.question_id][r.answer] = (qAgg[r.question_id][r.answer] || 0) + 1;
+      });
+      
+      let maxAgreement = 0;
+      let minAgreement = 100;
+      
+      Object.entries(qAgg).forEach(([_, counts]) => {
+        const totalForQ = Object.values(counts).reduce((a, b) => a + b, 0);
+        if (totalForQ > 0) {
+          const maxVotes = Math.max(...Object.values(counts));
+          const agreePct = (maxVotes / totalForQ) * 100;
+          if (agreePct > maxAgreement) maxAgreement = agreePct;
+          if (agreePct < minAgreement) minAgreement = agreePct;
+        }
+      });
+
+      setAgreementStats({ max: maxAgreement, min: minAgreement });
+    }
   };
+
+  const [agreementStats, setAgreementStats] = useState({ max: 0, min: 0 });
 
   const options = [
     "Obetydliga eller mindre brister",
     "Måttliga brister",
     "Stora brister, studien ingår inte i syntesen"
   ];
+
+  if (total > 0 && total < 3) {
+    return (
+      <div className="animate-fade-in pb-20 p-8 text-center">
+        <Users size={48} className="text-slate-300 mx-auto mb-4" />
+        <h2 className="text-xl font-bold text-slate-700 mb-2">Väntar på fler svar</h2>
+        <p className="text-slate-500">Gruppresultat visas när fler deltagare har svarat (minst 3 personer).</p>
+      </div>
+    );
+  }
 
   return (
     <div className="animate-fade-in pb-20">
@@ -59,12 +95,11 @@ export default function GroupResults() {
 
       <h1 className="text-3xl font-extrabold text-slate-900 mb-8">Gruppens sammanvägda bedömning</h1>
       
-      <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
-        
+      <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200 mb-8">
         <div className="flex items-center justify-between mb-8 pb-6 border-b border-slate-100">
           <div>
             <h2 className="text-lg font-bold text-slate-800">Totalt antal bedömningar</h2>
-            <p className="text-slate-500 text-sm">Denna sida uppdateras i realtid när kollegor svarar.</p>
+            <p className="text-slate-500 text-sm">Visar anonymiserad aggregerad data.</p>
           </div>
           <div className="bg-slate-100 text-slate-700 px-4 py-2 rounded-xl font-bold flex items-center gap-2">
             <Users size={20} />
@@ -98,8 +133,23 @@ export default function GroupResults() {
             );
           })}
         </div>
-
       </div>
+
+      {total >= 3 && agreementStats.max > 0 && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h3 className="font-bold text-slate-700 mb-1">Högsta enighet i en fråga</h3>
+            <p className="text-3xl font-extrabold text-green-600 mb-2">{Math.round(agreementStats.max)}%</p>
+            <p className="text-xs text-slate-500">I den fråga där gruppen var mest överens svarade en majoritet lika.</p>
+          </div>
+          
+          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h3 className="font-bold text-slate-700 mb-1">Största oenighet i en fråga</h3>
+            <p className="text-3xl font-extrabold text-amber-600 mb-2">{Math.round(agreementStats.min)}%</p>
+            <p className="text-xs text-slate-500 italic">Delad bedömning — gruppen tolkar artikelunderlaget olika.</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
