@@ -13,8 +13,10 @@
     "@supabase/supabase-js": "^2.117.1",
     "classnames": "^2.5.1",
     "lucide-react": "^1.48.0",
+    "pdfjs-dist": "^6.3.289",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-pdf": "^11.0.0",
     "react-router-dom": "^7.18.4",
     "zustand": "^5.0.15"
   },

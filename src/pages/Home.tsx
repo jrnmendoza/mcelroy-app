@@ -72,6 +72,57 @@ export default function Home() {
             </>
           )}
         </button>
+
+        <div className="mt-12 pt-10 border-t border-slate-100 text-left">
+          <h3 className="text-xl font-bold text-slate-800 mb-2">Källmaterial</h3>
+          <p className="text-sm text-slate-600 mb-6">
+            Vill du hellre göra granskningen manuellt kan du ladda ner SBU-mallen och använda originalartikeln vid sidan av.
+          </p>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 hover:border-blue-300 transition-colors">
+              <h4 className="font-bold text-slate-800 mb-1 text-sm">Originalstudien</h4>
+              <p className="text-xs text-slate-500 mb-4 line-clamp-2">McElroy et al. 2023. Psychological Safety and Hierarchy in Operating Room Debriefing.</p>
+              <div className="flex flex-col gap-2">
+                <button 
+                  onClick={() => navigate('/article?page=1')}
+                  className="text-xs font-semibold bg-blue-100 text-blue-700 py-2 px-3 rounded-lg hover:bg-blue-200 transition-colors text-center"
+                >
+                  Öppna studien i appen
+                </button>
+                <a 
+                  href={`${import.meta.env.BASE_URL}mcelroy2023.pdf`}
+                  download
+                  className="text-xs font-semibold bg-slate-200 text-slate-700 py-2 px-3 rounded-lg hover:bg-slate-300 transition-colors text-center"
+                >
+                  Ladda ner PDF
+                </a>
+              </div>
+            </div>
+
+            <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 hover:border-indigo-300 transition-colors">
+              <h4 className="font-bold text-slate-800 mb-1 text-sm">SBU:s granskningsmall</h4>
+              <p className="text-xs text-slate-500 mb-4 line-clamp-2">Bedömning av studier med kvalitativ metodik.</p>
+              <div className="flex flex-col gap-2">
+                <a 
+                  href="https://www.sbu.se/globalassets/ebm/mallar/kvalitativa_studier.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-xs font-semibold bg-indigo-100 text-indigo-700 py-2 px-3 rounded-lg hover:bg-indigo-200 transition-colors text-center"
+                >
+                  Öppna SBU-mallen
+                </a>
+                <a 
+                  href="https://www.sbu.se/globalassets/ebm/mallar/kvalitativa_studier.pdf"
+                  download
+                  className="text-xs font-semibold bg-slate-200 text-slate-700 py-2 px-3 rounded-lg hover:bg-slate-300 transition-colors text-center"
+                >
+                  Ladda ner SBU-mallen
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

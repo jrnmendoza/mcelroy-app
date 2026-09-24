@@ -6,7 +6,8 @@ export const STUDY_CONTENT = {
 För att fungera effektivt måste teammedlemmarna känna sig trygga (psychological safety) med att dela observationer och åsikter med resten av teamet. Mångfacetterade kirurgiska team drabbas dock ofta av rivalitet mellan olika grupper baserat på profession, kön och anciennitet. Den maktobalans som uppstår hindrar effektivt lagarbete. 
 
 Ett sätt att motverka problemet med hierarki inom kirurgin kan vara regelbunden team-debriefing. Syftet med studien var att "få insikter från medarbetare i frontlinjen om hur man utformar en effektiv policy för debriefing för vår operationsavdelning, att utforska operationspersonalens erfarenheter av debriefing, och att kritiskt reflektera över vad debriefing betyder för psykologisk trygghet, hierarki och lagarbete."`,
-    reference: "McElroy et al., Introduction, s. 567-568"
+    reference: "McElroy et al., Introduction, s. 567-568",
+    pdfPage: 1
   },
   methods: {
     title: "Metod",
@@ -26,7 +27,8 @@ Ett strategiskt urval (purposive sampling) resulterade i 40 intervjuer med opera
 
 **Datainsamling & Analys:**
 Två forskare utförde semistrukturerade intervjuer (efter träning från en oberoende kulturexpert) mellan dec 2021 och feb 2022. Intervjuerna ljudspelades in på en mobil enhet och transkriberades ordagrant (verbatim). Deltagarna fick godkänna sin transkribering. Kodning och temautveckling var rekursiva processer som innebar fördjupning i data och djup reflektion. Två forskare kodade data separat och träffades regelbundet för att diskutera och forma teman. Kvaliteten vägleddes av Braun & Clarkes checklistor och Nelson's conceptual depth scale.`,
-    reference: "McElroy et al., Materials and Methods, s. 568"
+    reference: "McElroy et al., Materials and Methods, s. 568",
+    pdfPage: 2
   },
   results: {
     title: "Resultat",
@@ -40,7 +42,8 @@ Betydelsen av psykologisk trygghet i teamet var ett starkt tema genomgående. Ps
 
 **3. Natural leader (Naturlig ledare)**
 Tanken på att det skulle finnas en "naturlig" ledare var ett tema, även om åsikterna gick isär om vem eller vad denna ledare skulle vara. Många ansåg att seniora läkare (kirurgen eller anestesiläkaren) var huvudledarna, medan andra ansåg att sjuksköterskor (som koordinerar operationslistan) var bäst lämpade. En del menade att vem som helst med rätt kompetens kunde leda. Temat belyser hur idén om en "naturlig ledare" ibland kan förstärka hierarkiska strukturer.`,
-    reference: "McElroy et al., Results, s. 568-569"
+    reference: "McElroy et al., Results, s. 568-569",
+    pdfPage: 2
   }
 };
 
@@ -55,7 +58,8 @@ export const SBU_DOMAINS = [
         article_evidence: {
           reported: "Syftet var att få insikter från medarbetare om debriefing, utforska erfarenheter och reflektera kring psykologisk trygghet och hierarki. De utgick från ett 'critical realism paradigm' och använde Reflexiv Tematisk Analys (RTA).",
           reference: "McElroy et al., Materials and Methods, s. 568",
-          extraContext: "Författarna använde 'critical realism' som söker förklara mekanismer i sociala sammanhang. Syftet att undersöka erfarenheter och utforma policys stämmer väl överens med en reflexiv tematisk analys (RTA)."
+          extraContext: "Författarna använde 'critical realism' som söker förklara mekanismer i sociala sammanhang. Syftet att undersöka erfarenheter och utforma policys stämmer väl överens med en reflexiv tematisk analys (RTA).",
+          pdfPage: 2
         },
         options: ["Ja", "Nej", "Oklart"]
       }
@@ -71,7 +75,8 @@ export const SBU_DOMAINS = [
         article_evidence: {
           reported: "40 operationsmedarbetare intervjuades: sjuksköterskor (14), anestesitekniker (7), anestesiläkare (7) och kirurger (12). Urvalet var strategiskt (purposive) för att fånga en rad olika professioner.",
           reference: "McElroy et al., Materials and Methods, s. 568 & Table 1",
-          extraContext: "Urvalet var strategiskt för att säkerställa att erfarenheter från flera yrkesgrupper som deltar i operationer hördes, vilket passar syftet om team-debriefing."
+          extraContext: "Urvalet var strategiskt för att säkerställa att erfarenheter från flera yrkesgrupper som deltar i operationer hördes, vilket passar syftet om team-debriefing.",
+          pdfPage: 2
         },
         options: ["Ja", "Nej", "Oklart"]
       },
@@ -81,7 +86,8 @@ export const SBU_DOMAINS = [
         article_evidence: {
           reported: "Personalen gjordes medveten om projektet på möten. Två forskare rekryterade aktivt deltagare att medverka. Skriftligt samtycke inhämtades.",
           reference: "McElroy et al., Materials and Methods, s. 568",
-          extraContext: "Rekryteringen skedde 'in the moment' när personal var tillgänglig på sjukhuset."
+          extraContext: "Rekryteringen skedde 'in the moment' när personal var tillgänglig på sjukhuset.",
+          pdfPage: 2
         },
         options: ["Ja", "Nej", "Oklart"]
       },
@@ -102,7 +108,8 @@ export const SBU_DOMAINS = [
         article_evidence: {
           reported: "Datainsamlingen var semistrukturerade intervjuer i avskilda rum, ljudinspelade och transkriberade ordagrant. Intervjuerna varade i 10-20 minuter och leddes med öppna frågor där informanten fick prata fritt.",
           reference: "McElroy et al., Materials and Methods, s. 568",
-          extraContext: "10-20 minuter kan vara kort för kvalitativa djupintervjuer, men acceptabelt i en stressig sjukhusmiljö."
+          extraContext: "10-20 minuter kan vara kort för kvalitativa djupintervjuer, men acceptabelt i en stressig sjukhusmiljö.",
+          pdfPage: 2
         },
         options: ["Ja", "Nej", "Oklart"]
       }
@@ -118,7 +125,8 @@ export const SBU_DOMAINS = [
         article_evidence: {
           reported: "Forskarna använde Braun och Clarkes metod för reflexiv tematisk analys (RTA). Kodning gjordes oberoende av två forskare (C.M. och J.H.) som därefter träffades för att forma teman. Tre teman utvecklades.",
           reference: "McElroy et al., Materials and Methods, s. 568",
-          extraContext: "Att två forskare kodar oberoende och sedan diskuterar för att forma gemensamma teman är en god metodologisk praxis inom RTA för att stärka trovärdigheten."
+          extraContext: "Att två forskare kodar oberoende och sedan diskuterar för att forma gemensamma teman är en god metodologisk praxis inom RTA för att stärka trovärdigheten.",
+          pdfPage: 2
         },
         options: ["Ja", "Nej", "Oklart"]
       },
@@ -128,7 +136,8 @@ export const SBU_DOMAINS = [
         article_evidence: {
           reported: "De uppger att de använde RTA och 'djup reflektion'. De redovisar dock inte detaljerat hur deras egna yrkesroller i gruppen inverkade på tolkningen av datan (t.ex. att överläkare intervjuar sjuksköterskor).",
           reference: "McElroy et al., Materials and Methods & Limitations, s. 568, 572",
-          extraContext: "Författarna nämner i limitations att deltagarna var från en enda avdelning, men problematiserar inte maktpositionen mellan intervjuare och respondent i sin analys."
+          extraContext: "Författarna nämner i limitations att deltagarna var från en enda avdelning, men problematiserar inte maktpositionen mellan intervjuare och respondent i sin analys.",
+          pdfPage: 2
         },
         options: ["Ja", "Nej", "Oklart"]
       },
@@ -138,7 +147,8 @@ export const SBU_DOMAINS = [
         article_evidence: {
           reported: "Deltagarna fick kopior av sina transkriberingar för godkännande. Formell 'member-checking' (validering av temana med intervjupersonerna) gjordes dock inte, vilket forskarna själva anger som en limitation.",
           reference: "McElroy et al., Limitations, s. 572",
-          extraContext: "De validerade rådatan (transkriptionerna), men inte den slutgiltiga analysen (temana)."
+          extraContext: "De validerade rådatan (transkriptionerna), men inte den slutgiltiga analysen (temana).",
+          pdfPage: 6
         },
         options: ["Ja", "Nej", "Oklart"]
       },
@@ -159,7 +169,8 @@ export const SBU_DOMAINS = [
         article_evidence: {
           reported: "Författarna (inklusive kirurger och annan personal) arbetade på samma institution (Starship Children's Hospital). Detta kan påverka frivilligheten och maktdynamiken i intervjusituationen.",
           reference: "McElroy et al., Affiliations & Methods, s. 567",
-          extraContext: "Närhet till deltagarna kan underlätta rekrytering men också skapa partiskhet (bias) där deltagarna svarar det de tror att forskaren/kollegan vill höra."
+          extraContext: "Närhet till deltagarna kan underlätta rekrytering men också skapa partiskhet (bias) där deltagarna svarar det de tror att forskaren/kollegan vill höra.",
+          pdfPage: 1
         },
         options: ["Ja", "Nej", "Oklart"]
       },
@@ -169,7 +180,8 @@ export const SBU_DOMAINS = [
         article_evidence: {
           reported: "Två forskare (C.M. och E.S.) fick träningssessioner av en oberoende kulturexpert inför intervjuerna för att hantera detta, och de uppger ett reflexivt förhållningssätt. Dock är informationen kortfattad.",
           reference: "McElroy et al., Materials and Methods, s. 568",
-          extraContext: "Det är oklart i hur stor utsträckning kulturexpertens träning hjälpte till att motverka den hierarkiska förförståelsen på kliniken."
+          extraContext: "Det är oklart i hur stor utsträckning kulturexpertens träning hjälpte till att motverka den hierarkiska förförståelsen på kliniken.",
+          pdfPage: 2
         },
         options: ["Ja", "Nej", "Oklart"]
       },
@@ -179,7 +191,8 @@ export const SBU_DOMAINS = [
         article_evidence: {
           reported: "Forskningen var stöttad av The Starship Foundation. Författarna deklarerar 'None declared' under Disclosure (jäv).",
           reference: "McElroy et al., Disclosure & Funding, s. 572",
-          extraContext: "Stiftelsen bakom sjukhuset stod för finansieringen. Inga andra intressekonflikter anges."
+          extraContext: "Stiftelsen bakom sjukhuset stod för finansieringen. Inga andra intressekonflikter anges.",
+          pdfPage: 6
         },
         options: ["Ja", "Nej", "Oklart"]
       },

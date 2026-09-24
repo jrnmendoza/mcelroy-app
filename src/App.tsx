@@ -10,6 +10,7 @@ import InteractiveActivity from './pages/InteractiveActivity';
 import AppraisalDomain from './pages/AppraisalDomain';
 import AppraisalOverall from './pages/AppraisalOverall';
 import GroupResults from './pages/GroupResults';
+import ArticleViewer from './pages/ArticleViewer';
 
 export default function App() {
   const { setUserId, loadProgress } = useAppStore();
@@ -56,6 +57,7 @@ export default function App() {
           <Route path="/results" element={<GroupResults />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
+        <Route path="/article" element={<ArticleViewer />} />
       </Routes>
     </Router>
   );
