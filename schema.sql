@@ -1,120 +1,120 @@
--- Drop existing tables if re-running
-DROP TABLE IF EXISTS group_decisions;
-DROP TABLE IF EXISTS responses;
-DROP TABLE IF EXISTS participants;
-DROP TABLE IF EXISTS journal_sessions;
+-- Supabase Schema for McElroy Asynchronous Appraisal App
+-- This drops the old schema entirely and recreates it for the new architecture.
 
--- Create tables
+-- Enable UUID extension
+create extension if not exists "uuid-ossp";
 
-CREATE TABLE IF NOT EXISTS journal_sessions (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    join_code TEXT UNIQUE NOT NULL,
-    status TEXT NOT NULL DEFAULT 'lobby', -- lobby, active, completed
-    current_stage INTEGER NOT NULL DEFAULT 0,
-    active_question TEXT,
-    reveal_results BOOLEAN DEFAULT false,
-    discussion_mode BOOLEAN DEFAULT false,
-    host_id UUID NOT NULL,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+-- Drop old tables if they exist
+drop table if exists responses cascade;
+drop table if exists participants cascade;
+drop table if exists journal_sessions cascade;
+
+-- Table: participant_progress
+-- Tracks where a user is in the self-paced module
+create table if not exists public.participant_progress (
+    user_id uuid primary key references auth.users(id) on delete cascade,
+    article_id text not null default 'mcelroy-2023',
+    current_section text not null default 'intro',
+    percentage_complete integer not null default 0,
+    updated_at timestamptz not null default now()
 );
 
-CREATE TABLE IF NOT EXISTS participants (
-    id UUID PRIMARY KEY,
-    session_id UUID NOT NULL REFERENCES journal_sessions(id) ON DELETE CASCADE,
-    joined_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    UNIQUE(id, session_id)
+-- Table: responses
+-- Tracks individual answers to SBU domains or interactive questions
+create table if not exists public.responses (
+    id uuid primary key default uuid_generate_v4(),
+    user_id uuid not null references auth.users(id) on delete cascade,
+    question_id text not null,
+    answer text not null,
+    comment text,
+    updated_at timestamptz not null default now(),
+    unique(user_id, question_id)
 );
 
-CREATE TABLE IF NOT EXISTS responses (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    session_id UUID NOT NULL REFERENCES journal_sessions(id) ON DELETE CASCADE,
-    user_id UUID NOT NULL REFERENCES participants(id) ON DELETE CASCADE,
-    question_id TEXT NOT NULL,
-    answer TEXT NOT NULL,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    UNIQUE(session_id, user_id, question_id)
+-- Table: overall_appraisal
+-- Tracks the final SBU methodological judgment
+create table if not exists public.overall_appraisal (
+    user_id uuid primary key references auth.users(id) on delete cascade,
+    article_id text not null default 'mcelroy-2023',
+    assessment text not null,
+    updated_at timestamptz not null default now()
 );
 
-CREATE TABLE IF NOT EXISTS group_decisions (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    session_id UUID NOT NULL REFERENCES journal_sessions(id) ON DELETE CASCADE,
-    question_id TEXT NOT NULL,
-    final_group_answer TEXT NOT NULL,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    UNIQUE(session_id, question_id)
-);
+-- Row Level Security (RLS) setup
 
--- Enable Row Level Security
-ALTER TABLE journal_sessions ENABLE ROW LEVEL SECURITY;
-ALTER TABLE participants ENABLE ROW LEVEL SECURITY;
-ALTER TABLE responses ENABLE ROW LEVEL SECURITY;
-ALTER TABLE group_decisions ENABLE ROW LEVEL SECURITY;
+-- Enable RLS
+alter table public.participant_progress enable row level security;
+alter table public.responses enable row level security;
+alter table public.overall_appraisal enable row level security;
 
--- Enable Realtime
--- Realtime is enabled for these tables so the presenter view updates live
-alter publication supabase_realtime add table journal_sessions;
-alter publication supabase_realtime add table participants;
-alter publication supabase_realtime add table responses;
-alter publication supabase_realtime add table group_decisions;
+-- Policies for participant_progress
+-- Users can only read and update their own progress
+create policy "Users can view own progress" 
+on public.participant_progress for select 
+using (auth.uid() = user_id);
 
--- RLS Policies
+create policy "Users can insert own progress" 
+on public.participant_progress for insert 
+with check (auth.uid() = user_id);
 
--- journal_sessions
--- Anyone can create a session (acting as host)
-CREATE POLICY "Anyone can create a session" ON journal_sessions
-    FOR INSERT WITH CHECK (auth.uid() = host_id);
+create policy "Users can update own progress" 
+on public.participant_progress for update 
+using (auth.uid() = user_id);
 
--- Anyone can read active sessions
-CREATE POLICY "Anyone can read sessions" ON journal_sessions
-    FOR SELECT USING (true);
+-- Policies for responses
+-- Users can read their own responses, but also we need aggregate reads.
+-- For aggregate reads, we can allow everyone to read all responses.
+create policy "Anyone can read responses for aggregates" 
+on public.responses for select 
+using (true);
 
--- Only the host can update the session state
-CREATE POLICY "Host can update session" ON journal_sessions
-    FOR UPDATE USING (auth.uid() = host_id);
+create policy "Users can insert own responses" 
+on public.responses for insert 
+with check (auth.uid() = user_id);
 
+create policy "Users can update own responses" 
+on public.responses for update 
+using (auth.uid() = user_id);
 
--- participants
--- Users can join a session (insert themselves)
-CREATE POLICY "Users can join session" ON participants
-    FOR INSERT WITH CHECK (auth.uid() = id);
+-- Policies for overall_appraisal
+-- Anyone can read for aggregates
+create policy "Anyone can read overall appraisals for aggregates" 
+on public.overall_appraisal for select 
+using (true);
 
--- Users can read their own participation, and hosts can read all participants for their session
-CREATE POLICY "Users read own and hosts read all participants" ON participants
-    FOR SELECT USING (
-        auth.uid() = id OR 
-        EXISTS (SELECT 1 FROM journal_sessions WHERE id = participants.session_id AND host_id = auth.uid())
-    );
+create policy "Users can insert own appraisal" 
+on public.overall_appraisal for insert 
+with check (auth.uid() = user_id);
 
+create policy "Users can update own appraisal" 
+on public.overall_appraisal for update 
+using (auth.uid() = user_id);
 
--- responses
--- Users can insert their own responses
-CREATE POLICY "Users can insert own responses" ON responses
-    FOR INSERT WITH CHECK (auth.uid() = user_id);
+-- Setup Realtime publications so aggregate counts can be updated live if needed
+begin;
+  drop publication if exists supabase_realtime;
+  create publication supabase_realtime;
+commit;
+alter publication supabase_realtime add table public.responses;
+alter publication supabase_realtime add table public.overall_appraisal;
 
--- Users can update their own responses
-CREATE POLICY "Users can update own responses" ON responses
-    FOR UPDATE USING (auth.uid() = user_id);
+-- Optional: Triggers for updated_at
+create or replace function public.handle_updated_at()
+returns trigger as $$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$$ language plpgsql;
 
--- Users can read their own responses, hosts can read all responses for their session
-CREATE POLICY "Users read own and hosts read all responses" ON responses
-    FOR SELECT USING (
-        auth.uid() = user_id OR 
-        EXISTS (SELECT 1 FROM journal_sessions WHERE id = responses.session_id AND host_id = auth.uid())
-    );
+create trigger handle_updated_at_participant_progress
+  before update on public.participant_progress
+  for each row execute procedure public.handle_updated_at();
 
+create trigger handle_updated_at_responses
+  before update on public.responses
+  for each row execute procedure public.handle_updated_at();
 
--- group_decisions
--- Only host can insert/update group decisions
-CREATE POLICY "Host can insert group decisions" ON group_decisions
-    FOR INSERT WITH CHECK (
-        EXISTS (SELECT 1 FROM journal_sessions WHERE id = group_decisions.session_id AND host_id = auth.uid())
-    );
-
-CREATE POLICY "Host can update group decisions" ON group_decisions
-    FOR UPDATE USING (
-        EXISTS (SELECT 1 FROM journal_sessions WHERE id = group_decisions.session_id AND host_id = auth.uid())
-    );
-
--- Everyone can read group decisions
-CREATE POLICY "Everyone can read group decisions" ON group_decisions
-    FOR SELECT USING (true);
+create trigger handle_updated_at_overall_appraisal
+  before update on public.overall_appraisal
+  for each row execute procedure public.handle_updated_at();
