@@ -33,6 +33,8 @@ export default function Layout() {
             <button onClick={() => navigate('/study/background')} className="hover:text-blue-600">Studien</button>
             <button onClick={() => navigate('/appraisal/domain-1')} className="hover:text-blue-600">SBU-granskning</button>
             <button onClick={() => navigate('/results')} className="hover:text-blue-600">Resultat</button>
+            <div className="h-4 w-px bg-slate-300"></div>
+            <button onClick={() => navigate('/article?page=1')} className="hover:text-blue-600 font-semibold text-blue-800">Källmaterial</button>
           </nav>
         </div>
         
@@ -65,6 +67,16 @@ export default function Layout() {
                 {item.title}
               </button>
             ))}
+            <div className="h-px w-full bg-slate-200 my-2"></div>
+            <button
+              className="text-left p-3 rounded-lg font-medium text-blue-700 hover:bg-slate-50"
+              onClick={() => {
+                navigate('/article?page=1');
+                setMenuOpen(false);
+              }}
+            >
+              Källmaterial (PDF)
+            </button>
           </div>
         </div>
       )}
